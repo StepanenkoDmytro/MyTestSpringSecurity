@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+<div>
+    <form action="/auth/logout" method="post">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div><br>
+
+{{#allPosts}}
+    <div>
+        <b>{{id}}</b>
+        <b>{{title}}</b>
+        <span>{{anons}}</span>
+        <i>{{tag}}</i>
+    </div>
+{{/allPosts}}
+
+
+</body>
+</html>
