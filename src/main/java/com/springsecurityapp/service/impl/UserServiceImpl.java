@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,6 +29,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @Override
     public Optional<User> getByEmail(String email) {
         return userRepository.findByEmail(email);
     }
@@ -38,8 +44,13 @@ public class UserServiceImpl implements UserService {
         user.setStatus(Status.ACTIVE);
         user.setPassword(passwordEncoder().encode(user.getPassword()));
         userRepository.save(user);
-        System.out.println(user);
     }
+
+    @Override
+    public void saveUser(User user) {
+        userRepository.save(user);
+    }
+
 
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12);

@@ -1,13 +1,14 @@
 package com.springsecurityapp.model;
 
+import lombok.Data;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public enum Role {
-    USER(Set.of(Permission.DEVELOPERS_READ)),
-    ADMIN(Set.of(Permission.DEVELOPERS_READ, Permission.DEVELOPERS_WRITE));
+    USER(Set.of(Permission.USERS_READ)),
+    ADMIN(Set.of(Permission.USERS_READ, Permission.USERS_WRITE));
 
     private final Set<Permission> permissions;
 
@@ -24,4 +25,5 @@ public enum Role {
                 .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
                 .collect(Collectors.toSet());
     }
+
 }

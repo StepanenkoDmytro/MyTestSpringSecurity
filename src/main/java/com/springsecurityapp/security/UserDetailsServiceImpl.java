@@ -1,5 +1,6 @@
 package com.springsecurityapp.security;
 
+import com.springsecurityapp.model.Role;
 import com.springsecurityapp.model.User;
 import com.springsecurityapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

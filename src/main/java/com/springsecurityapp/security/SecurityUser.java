@@ -1,29 +1,42 @@
 package com.springsecurityapp.security;
 
+import com.springsecurityapp.model.Permission;
+import com.springsecurityapp.model.Role;
+import com.springsecurityapp.service.impl.UserServiceImpl;
 import lombok.Data;
 import com.springsecurityapp.model.Status;
 import com.springsecurityapp.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Data
 public class SecurityUser implements UserDetails {
+
+    @Autowired
+    private UserServiceImpl userService;
 
     private final String username;
     private final String password;
     private final List<SimpleGrantedAuthority> authorities;
     private final boolean isActive;
 
-    public SecurityUser(String username, String password, List<SimpleGrantedAuthority> authorities, boolean isActive) {
+
+    public SecurityUser(String username, String password, List<SimpleGrantedAuthority> authorities, boolean isActive
+    ,boolean admin) {
         this.username = username;
         this.password = password;
         this.authorities = authorities;
         this.isActive = isActive;
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

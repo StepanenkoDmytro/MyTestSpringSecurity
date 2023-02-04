@@ -20,17 +20,17 @@ public class RegistrationController {
         this.userService = userService;
     }
 
-    @GetMapping("/registration")
+    @GetMapping("/registration.ftl")
     public String registration() {
-        return "registration";
+        return "registration.ftl";
     }
 
-    @PostMapping("/registration")
+    @PostMapping("/registration.ftl")
     public String addUser(User user, Map<String, Object> model) {
         Optional<User> userFromDb = userService.getByEmail(user.getEmail());
         if (userFromDb.isPresent()) {
             model.put("message", "User exists!");
-            return "registration";
+            return "registration.ftl";
         }
         userService.registration(user);
         return "redirect:/auth/login";
